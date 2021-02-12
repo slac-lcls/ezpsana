@@ -21,7 +21,7 @@ Follow the instructions [here](https://docs.conda.io/en/latest/miniconda.html).
 
 ### build the environment
 
-Then simply run the following script (not that it is equivalent to just do `conda env create -f <.yaml>` at this point).
+Then simply run the following script (note that it is equivalent to just do `conda env create -f <.yaml>` at this point).
 ```bash
 ./build-envs.sh <path to .yaml file>
 ```
