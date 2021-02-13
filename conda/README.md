@@ -26,4 +26,20 @@ Then simply run the following script (note that it is equivalent to just do `con
 ./build-envs.sh <path to .yaml file>
 ```
 
+# Usage
 
+## CLI
+
+```bash
+conda activate <env_name>
+```
+
+## JupyterLab
+
+### on PSWWW
+
+see [instructions](https://confluence.slac.stanford.edu/display/PSDM/Installing+Your+Own+Python+Packages)
+
+### on SDF
+
+see [instructions]()
