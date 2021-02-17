@@ -29,6 +29,7 @@ RUN \
         gfortran                                                               \
         tar                                                                    \
         strace
+    apt-get --yes clean
 
 # Timezone to Stanford
 

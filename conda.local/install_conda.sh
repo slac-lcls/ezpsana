@@ -46,7 +46,16 @@ EOF
 #
 
 source $conda_setup_path/env.local
-conda update -y --all -n base -c defaults conda
+conda update -y -n base -c defaults conda
+
+#
+# Clean-up  conda installer
+#
+if [[ $USE_PPC = true ]]; then
+    rm $conda_setup_path/Miniconda3-latest-Linux-ppc64le.sh
+else
+    rm $conda_setup_path/Miniconda3-latest-Linux-x86_64.sh
+fi
 
 
 echo "Conda is all set up in $conda_prefix"
