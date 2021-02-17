@@ -26,6 +26,11 @@ Then simply run the following script (note that it is equivalent to just do `con
 ./build-envs.sh <path to .yaml file>
 ```
 
+### troubleshooting
+
+It is more difficult to troubleshoot if you install your conda environment on "bare metal" rather than in a container, but here are issues that we have encountered so far:
+- multiple instances of the same package (experienced this with `cupy`): if `pip freeze | grep <package-name>` yields more than one result, try to `pip uninstall` the ones that you think should not be here.
+
 # Usage
 
 ## CLI
