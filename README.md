@@ -31,7 +31,7 @@ singularity pull docker://slaclcls/ana-py3:latest
 ### Run
 For example, requesting a compute node with GPU on SDF:
 ```bash
-srun -A LCLS -p LCLS -n 1 --gpus 1 --pty /bin/bash
+srun -A LCLS -n 1 --gpus 1 --pty /bin/bash
 ```
 then
 ```bash

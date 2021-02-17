@@ -2,6 +2,6 @@
 
 # Load environment
 source /img/conda/vars.sh
-source activate $CONDA_ENV
+source activate /img/conda.local/miniconda3/envs/$CONDA_ENV
 
 exec "$@"
