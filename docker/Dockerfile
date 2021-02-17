@@ -28,7 +28,8 @@ RUN \
         make                                                                   \
         gfortran                                                               \
         tar                                                                    \
-        strace
+        strace                                                                 \
+        libgl1-mesa-dev &&                                                     \
     apt-get --yes clean
 
 # Timezone to Stanford
