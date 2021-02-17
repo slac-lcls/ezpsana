@@ -38,5 +38,8 @@ fi
 echo "...> about to create $env_name"
 conda env create -f $1
 
+echo "...> cleaning up"
+conda clean -y --all
+
 echo "...> activating $env_name ..."
 source activate $env_name
