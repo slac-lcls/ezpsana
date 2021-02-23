@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/sdf/home/f/fpoitevi/ezpsana/test/test.py", line 2, in <module>
+    ds = DataSource(exp='tmoc00118', run=222, dir='/cds/data/psdm/prj/public01/xtc', max_events=10)
+  File "/img/conda.local/miniconda3/envs/ana-py3/lib/python3.7/site-packages/psana/datasource.py", line 65, in DataSource
+    ds = fwk.dataSource(*args)
+TypeError: Error: PSAna.dataSource expects at least one argument
