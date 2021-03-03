@@ -3,6 +3,13 @@
 import sys
 import yaml
 
+# Removes the build string from an
+# environment dependency entry
+def remove_build_string(entry):
+    items = entry.split("=")
+    return "{}={}".format(items[0], items[1])
+
+
 # Read input parameters
 host_type = sys.argv[1]
 input_yaml_file = sys.argv[2]
@@ -22,28 +29,43 @@ else:
 with open(input_yaml_file, "r") as fh:
     env = yaml.safe_load(fh)
 
+# Extract information about python version
+python_entry = next(
+    entry
+    for entry in env["dependencies"]
+    if not isinstance(entry, dict) and entry.startswith("python")
+)
+python_version = int(python_entry.split("=")[1][0])
+
 # Strip build strings for openmpi and mpi
 # This is needed because the environments come
 # with custom LSF-enabled MPI packages that are
 # not available on conda-forge. When we switch to
 # SLURM and can use the conda-forge packages, this
 # part can be removed
-for index, entry in enumerate(env["dependencies"]):
-    if not isinstance(entry, dict):
-        items = entry.split("=")
-        if items[0].strip() == "openmpi" or items[0].strip() == "mpi4py":
-            env["dependencies"][index] = "{}={}".format(items[0], items[1])
+env["dependencies"] = [
+    remove_build_string(entry)
+    if not isinstance(entry, dict)
+    and (entry.startswith("openmpi") or entry.startswith("mpi4py"))
+    else entry
+    for entry in env["dependencies"]
+]
 
-# Remove the file channels
-env["channels"] = [entry for entry in env["channels"] if not entry.startswith("file://") and not entry.startswith("/")]
+# Remove the LCLS custom channels
+env["channels"] = [
+    entry
+    for entry in env["channels"]
+    if not entry.startswith("file://") and not entry.startswith("/")
+]
 
 # Add cudatoolkit and cupy dependencies
-env["dependencies"].extend(
-    [
-        "cudatoolkit={}".format(cudatoolkit_version),
-        "cupy",
-    ]
-)
+if python_version == 3:
+    env["dependencies"].extend(
+        [
+            "cudatoolkit={}".format(cudatoolkit_version),
+            "cupy",
+        ]
+    )
 
 # Write output YAML environmentfile
 with open(output_yaml_file, "w") as fh:

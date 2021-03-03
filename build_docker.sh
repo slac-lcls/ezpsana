@@ -13,7 +13,7 @@ elif [ ! -f "$1" ]; then
   echo "ERROR: $1 could not be found. Exiting..."
   exit
 else
-  image_name=`head -n 1 $1 | awk -v FS=" " '{print $2}'`
+  image_name=`grep name $1 | awk -v FS=" " '{print $2}'`
 fi
 
 set -e
