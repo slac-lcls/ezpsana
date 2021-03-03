@@ -10,7 +10,7 @@
 ### Write YAML from template, corresponding to host
 The following script adds a few packages to the stable psana environment, hoping a solution exists. Some package versions, like `cudatoolkit`, will vary from a host to another; this can be dealt with in this script.
 ```bash
-./edit-yaml.sh
+python edit-yaml.sh <hostname> <input YAML> <output YAML>
 ```
 
 ## Create the environments from the recipes

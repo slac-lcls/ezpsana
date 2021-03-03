@@ -1,16 +1,19 @@
 #!/bin/bash
 
-for py in "py2" "py3"; do
+version=${1-latest}
+pslocation="/cds/sw/ds/ana/conda1/envfiles/"
 
-  echo "...> scp ${USER}@psexport.slac.stanford.edu:/cds/sw/ds/ana/conda1/manage-feedstocks/jenkins/ana-env-${py}.yaml tmp.yaml"
-  scp ${USER}@psexport.slac.stanford.edu:/cds/sw/ds/ana/conda1/manage-feedstocks/jenkins/ana-env-${py}.yaml tmp.yaml
+for yml in "ana-${version}.yml" "ana-${version}-py3.yml"; do
 
-  echo "...> removing local channel line in yaml file"
-  grep -v "file:///" tmp.yaml > ana-env-${py}.yaml.template; rm -f tmp.yaml
+  echo "...> scp ${USER}@psexport.slac.stanford.edu:${pslocation}${yml} ${yml}.template"
+  scp ${USER}@psexport.slac.stanford.edu:${pslocation}${yml} ${yml}.template
 
-  echo "...> changing env name in yaml file to ana-env-${py}"
-  sed -i "s/name: ana/name: ana-${py}/g" ana-env-${py}.yaml.template
+  #echo "...> removing local channel line in yaml file"
+  #grep -v "file:///" tmp.yaml > ana-env-${py}.yaml.template; rm -f tmp.yaml
+  #
+  #echo "...> changing env name in yaml file to ana-env-${py}"
+  #sed -i "s/name: ana/name: ana-${py}/g" ana-env-${py}.yaml.template
 
-  echo "!!!> checkout template file: ana-env-${py}.yaml.template"
+  echo "!!!> checkout template file: ${yml}.template"
 
 done
