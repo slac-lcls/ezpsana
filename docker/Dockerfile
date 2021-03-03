@@ -4,7 +4,7 @@ WORKDIR /root
 
 # Install useful packages
 RUN apt-get -y update && \
-    apt-get -y install wget vim-full emacs tmux screen && \
+    apt-get -y install wget vim emacs tmux screen && \
     rm -rf /var/lib/apt/lists/* 
 
 # Download miniconda installer, perform the installation and remove it
