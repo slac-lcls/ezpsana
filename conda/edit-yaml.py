@@ -29,9 +29,10 @@ with open(input_yaml_file, "r") as fh:
 # SLURM and can use the conda-forge packages, this
 # part can be removed
 for index, entry in enumerate(env["dependencies"]):
-    items = entry.split("=")
-    if items[0].strip() == "openmpi" or items[0].strip() == "mpi4py":
-        env["dependencies"][index] = "{}={}".format(items[0], items[1])
+    if not isinstance(entry, dict):
+        items = entry.split("=")
+        if items[0].strip() == "openmpi" or items[0].strip() == "mpi4py":
+            env["dependencies"][index] = "{}={}".format(items[0], items[1])
 
 # Add cudatoolkit and cupy dependencies
 env["dependencies"].extend(
