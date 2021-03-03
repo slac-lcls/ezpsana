@@ -19,12 +19,20 @@ else
   echo $prefix $version
 fi
 
+hosttype=""
+if [[ "$1" =~ .*"-psana".* ]]; then
+  hosttype="-psana"
+fi
+if [[ "$1" =~ .*"-sdf".* ]]; then
+  hosttype="ssdf"
+fi
+
 set -e
 
-echo "build: "${prefix}:${suffix}
+echo "build: "${prefix}${hosttype}:${suffix}
 echo "YAML file: "$(basename $1)
 docker build ${docker_cache_option}                             \
     --build-arg inputyaml=$(basename $1)                        \
     --build-arg psana_version=${version}                        \
-    --tag slaclcls/${prefix}:${version}                         \
+    --tag slaclcls/${prefix}${hosttype}:${version}                         \
     docker

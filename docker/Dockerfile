@@ -24,4 +24,4 @@ ADD entrypoint.sh /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
 
 # Set an environment variable that stores the version of the container
-ENV PSANA_VERSION $version
+ENV PSANA_VERSION ${psana_version}
