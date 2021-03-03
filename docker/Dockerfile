@@ -4,7 +4,7 @@ WORKDIR /root
 
 # Install useful packages
 RUN apt-get -y update && \
-    apt-get -y install wget vim emacs tmux screen && \
+    apt-get -y install wget vim emacs tmux screen libgl1-mesa-dev && \
     rm -rf /var/lib/apt/lists/* 
 
 # Download miniconda installer, perform the installation and remove it
@@ -24,4 +24,4 @@ ADD entrypoint.sh /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
 
 # Set an environment variable that stores the version of the container
-ENV PSANA_VERSION $inputyaml
+ENV PSANA_VERSION $version

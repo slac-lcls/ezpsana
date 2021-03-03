@@ -14,13 +14,17 @@ elif [ ! -f "$1" ]; then
   exit
 else
   image_name=`grep name $1 | awk -v FS=" " '{print $2}'`
+  version=${image_name#*-}
+  prefix=${image_name/-$version/}
+  echo $prefix $version
 fi
 
 set -e
 
-echo "build: "${image_name}
+echo "build: "${prefix}:${suffix}
 echo "YAML file: "$(basename $1)
 docker build ${docker_cache_option}                             \
     --build-arg inputyaml=$(basename $1)                        \
-    -t ${image_name}                                            \
+    --build-arg psana_version=${version}                        \
+    --tag slaclcls/${prefix}:${version}                         \
     docker
