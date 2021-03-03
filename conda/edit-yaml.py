@@ -34,6 +34,9 @@ for index, entry in enumerate(env["dependencies"]):
         if items[0].strip() == "openmpi" or items[0].strip() == "mpi4py":
             env["dependencies"][index] = "{}={}".format(items[0], items[1])
 
+# Remove the file channels
+env["channels"] = [entry for entry in env["channels"] if not entry.startswith("file://") and not entry.startswith("/")]
+
 # Add cudatoolkit and cupy dependencies
 env["dependencies"].extend(
     [
