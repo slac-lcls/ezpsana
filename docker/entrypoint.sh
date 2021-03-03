@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-source /img/conda.local/env.sh
-# Load environment
-source /img/conda/vars.sh
-source activate /img/conda.local/miniconda3/envs/$CONDA_ENV
+source /opt/anaconda/etc/profile.d/conda.sh
+conda activate ana
 
 exec "$@"

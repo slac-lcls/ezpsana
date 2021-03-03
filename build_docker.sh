@@ -1,29 +1,30 @@
 #!/usr/bin/env bash
 
-defaultyaml="conda/ana-env-py3.yaml"
+docker_cache_option="--no-cache"
+if [ ! ${DOCKER_DEBUG} == "" ]; then
+  docker_cache_option=""
+  echo "Debugging mode, using cache...."
+fi
 
-inputyaml=${1:-$(defaultyaml)}
-
-if [ ! -f "${inputyaml}" ]; then
-  echo "ERROR: ${inputyaml} could not be found. Exiting..."
+if [ "$1" == "" ]; then
+  echo "ERROR: Please provide input YAML file. Exiting..."
+  exit
+elif [ ! -f "$1" ]; then
+  echo "ERROR: $1 could not be found. Exiting..."
   exit
 else
-  image_name=`head -n 1 $inputyaml | awk -v FS=" " '{print $2}'`
+  image_name=`grep name $1 | awk -v FS=" " '{print $2}'`
+  version=${image_name#*-}
+  prefix=${image_name/-$version/}
+  echo $prefix $version
 fi
 
 set -e
 
-# use absolute paths:
-#project_root=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
-project_root=$(greadlink -f $(dirname ${BASH_SOURCE[0]}))
-# if `readlink -f` is not available on your machine,
-# `brew install coreutils` then use `greadlink -f`
-
-echo "build    : $image_name"
-
-docker build                                                    \
-    --build-arg inputyaml=$(basename $inputyaml)                \
-    -t ${image_name}:latest                                     \
-    -f $project_root/docker/Dockerfile                          \
-    --no-cache                                                  \
-    $project_root
+echo "build: "${prefix}:${suffix}
+echo "YAML file: "$(basename $1)
+docker build ${docker_cache_option}                             \
+    --build-arg inputyaml=$(basename $1)                        \
+    --build-arg psana_version=${version}                        \
+    --tag slaclcls/${prefix}:${version}                         \
+    docker
