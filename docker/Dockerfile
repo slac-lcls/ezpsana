@@ -1,4 +1,4 @@
-FROM docker.io/nvidia/cuda:10.1-devel-ubuntu18.04
+FROM docker.io/ubuntu:18.04
 ARG inputyaml
 ARG psana_version
 WORKDIR /root
