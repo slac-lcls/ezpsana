@@ -24,7 +24,7 @@ if [[ "$1" =~ .*"-psana".* ]]; then
   hosttype="-psana"
 fi
 if [[ "$1" =~ .*"-sdf".* ]]; then
-  hosttype="ssdf"
+  hosttype="sdf"
 fi
 
 set -e
