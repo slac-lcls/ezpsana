@@ -16,7 +16,6 @@ else
   image_name=`grep name $1 | awk -v FS=" " '{print $2}'`
   version=${image_name#*-}
   prefix=${image_name/-$version/}
-  echo $prefix $version
 fi
 
 hosttype=""
@@ -29,7 +28,7 @@ fi
 
 set -e
 
-echo "build: "${prefix}${hosttype}:${suffix}
+echo "build: "${prefix}${hosttype}:${version}
 echo "YAML file: "$(basename $1)
 docker build ${docker_cache_option}                             \
     --build-arg inputyaml=$(basename $1)                        \
