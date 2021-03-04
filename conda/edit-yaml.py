@@ -21,6 +21,8 @@ if host_type == "sdf":
     cudatoolkit_version = "10.2"
 elif host_type == "psana":
     cudatoolkit_version = "11"
+elif host_type == "none":
+    cudatoolkit_version = None
 else:
     print("Host type unknown: {}".format(sys.argv[1]))
     sys.exit(1)
@@ -59,7 +61,7 @@ env["channels"] = [
 ]
 
 # Add cudatoolkit and cupy dependencies
-if python_version == 3:
+if python_version == 3 and cudatoolkit_version is not None:
     env["dependencies"].extend(
         [
             "cudatoolkit={}".format(cudatoolkit_version),

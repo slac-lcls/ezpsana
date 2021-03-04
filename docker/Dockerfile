@@ -1,10 +1,11 @@
-FROM docker.io/nvidia/cuda:10.1-devel-ubuntu18.04
+FROM docker.io/ubuntu:18.04
 ARG inputyaml
+ARG psana_version
 WORKDIR /root
 
 # Install useful packages
 RUN apt-get -y update && \
-    apt-get -y install wget vim emacs tmux screen libgl1-mesa-dev && \
+    apt-get -y install wget vim emacs tmux screen openssh-client libgl1-mesa-dev && \
     rm -rf /var/lib/apt/lists/* 
 
 # Download miniconda installer, perform the installation and remove it
@@ -24,4 +25,4 @@ ADD entrypoint.sh /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
 
 # Set an environment variable that stores the version of the container
-ENV PSANA_VERSION $version
+ENV PSANA_VERSION ${psana_version}
