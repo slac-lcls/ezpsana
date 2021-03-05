@@ -5,7 +5,7 @@ WORKDIR /root
 
 # Install useful packages
 RUN apt-get -y update && \
-    apt-get -y install wget vim emacs tmux screen openssh-client libgl1-mesa-dev && \
+    apt-get -y install wget vim emacs tmux screen openssh-client && \
     rm -rf /var/lib/apt/lists/* 
 
 # Download miniconda installer, perform the installation and remove it

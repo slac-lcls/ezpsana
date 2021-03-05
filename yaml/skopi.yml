@@ -1,0 +1,3 @@
+dependencies:
+  - cudatools=10.2
+  - cupy

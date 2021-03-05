@@ -14,25 +14,14 @@ elif [ ! -f "$1" ]; then
   exit
 else
   image_name=`grep name $1 | awk -v FS=" " '{print $2}'`
-  version=${image_name#*-}
-  prefix=${image_name/-$version/}
-  echo $prefix $version
-fi
-
-hosttype=""
-if [[ "$1" =~ .*"-psana".* ]]; then
-  hosttype="-psana"
-fi
-if [[ "$1" =~ .*"-sdf".* ]]; then
-  hosttype="sdf"
 fi
 
 set -e
 
-echo "build: "${prefix}${hosttype}:${suffix}
+echo "build: "${image_name}
 echo "YAML file: "$(basename $1)
 docker build ${docker_cache_option}                             \
     --build-arg inputyaml=$(basename $1)                        \
-    --build-arg psana_version=${version}                        \
-    --tag slaclcls/${prefix}${hosttype}:${version}                         \
+    --build-arg psana_version=${image_version}                  \
+    --tag slaclcls/${image_name}                                \
     docker
