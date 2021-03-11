@@ -113,6 +113,18 @@ base_env["dependencies"] = [
     for entry in base_env["dependencies"]
 ]
 
+# Remove pyopengl if present in the environment
+# The "glue" packages are currently removed, but
+# this  part of the script will be obsolete once
+# glueviz is removed from the original environment
+base_env["dependencies"] = [
+    entry
+    for entry in base_env["dependencies"]
+    if not isinstance(entry, dict)
+    and not entry.startswith("pyopengl")
+    and not entry.startswith("glue")
+]
+
 # Remove the LCLS custom channels
 base_env["channels"] = [
     entry
