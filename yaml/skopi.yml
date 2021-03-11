@@ -1,3 +1,5 @@
 dependencies:
   - cudatoolkit=10.2
   - cupy
+  - pip:
+    - skopi
