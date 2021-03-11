@@ -6,7 +6,7 @@ WORKDIR /root
 # Install useful packages
 RUN apt-get -y update && \
     apt-get -y install wget vim emacs tmux screen openssh-client && \
-    rm -rf /var/lib/apt/lists/* 
+    rm -rf /var/lib/apt/lists/*
 
 # Download miniconda installer, perform the installation and remove it
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
@@ -14,7 +14,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     /root/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda && \
     rm /root/Miniconda3-latest-Linux-x86_64.sh
 
-# Copy the environment file and generate the environemtn
+# Copy the environment file and generate the environment
 COPY $inputyaml /root/$inputyaml
 RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda env create -n ana -f ${inputyaml} && \
