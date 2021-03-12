@@ -13,7 +13,7 @@ While most of the approach we follow is based on building conda environment, we 
 
 #### Check if your container already exists!
 
-All psana-based containers that we build are stored at the following URL: `https://hub.docker.com/repository/docker/slaclcls`
+All psana-based containers that we build are stored at the following [URL](https://hub.docker.com/repository/docker/slaclcls)
 Have a look there! If you don't find what you are looking for, proceed to the next step...
 
 #### Create your container
