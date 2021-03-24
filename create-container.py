@@ -35,6 +35,15 @@ parser.add_argument(
     action="store",
 )
 parser.add_argument(
+    "-l",
+    "--additional-channel-yaml-file",
+    dest="additional_channel_filename",
+    type=str,
+    default=None,
+    help="YAML file for additional conda channels",
+    action="store",
+)
+parser.add_argument(
     "-o",
     "--output-yaml-file",
     dest="output_filename",
@@ -131,6 +140,23 @@ base_env["channels"] = [
     for entry in base_env["channels"]
     if not entry.startswith("file://") and not entry.startswith("/")
 ]
+if args.additional_channel_filename is not None:
+    # Read user additional channel YAML file
+    print(
+        ">> Reading additional channel YAML file: {}".format(
+            pathlib.Path(args.additional_channel_filename)
+        )
+    )
+    try:
+        with open(pathlib.Path(args.additional_channel_filename), "r") as fh:
+            additional_channels = yaml.safe_load(fh)
+    except OSError as exc:
+        print(">> Error reading the file: {}".format(exc))
+        sys.exit(1)
+
+    # Add additional user-provided channel
+    print(">> Adding custom channels to base environment")
+    base_env["channels"].extend(additional_channels["channels"])
 
 if args.additional_deps_filename is not None:
     # Read user additional dependencies YAML file
