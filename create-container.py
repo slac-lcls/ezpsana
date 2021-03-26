@@ -4,6 +4,8 @@ import argparse
 import pathlib
 import sys
 
+import jinja2
+
 import docker
 import yaml
 
@@ -27,22 +29,14 @@ parser.add_argument(
 )
 parser.add_argument(
     "-a",
-    "--additional-deps-yaml-file",
-    dest="additional_deps_filename",
+    "--additional-env-yaml-file",
+    dest="additional_env_filename",
     type=str,
     default=None,
-    help="YAML file for additional dependencies",
+    help="YAML file for additional environment entries",
     action="store",
 )
-parser.add_argument(
-    "-l",
-    "--additional-channel-yaml-file",
-    dest="additional_channel_filename",
-    type=str,
-    default=None,
-    help="YAML file for additional conda channels",
-    action="store",
-)
+
 parser.add_argument(
     "-o",
     "--output-yaml-file",
@@ -57,6 +51,13 @@ parser.add_argument(
     "--build-docker-container",
     dest="build",
     help="Build docker container",
+    action="store_true",
+)
+parser.add_argument(
+    "-e",
+    "--render-travis-file",
+    dest="render",
+    help="Render build into the .travis.yml file",
     action="store_true",
 )
 parser.add_argument(
@@ -140,41 +141,28 @@ base_env["channels"] = [
     for entry in base_env["channels"]
     if not entry.startswith("file://") and not entry.startswith("/")
 ]
-if args.additional_channel_filename is not None:
-    # Read user additional channel YAML file
-    print(
-        ">> Reading additional channel YAML file: {}".format(
-            pathlib.Path(args.additional_channel_filename)
-        )
-    )
-    try:
-        with open(pathlib.Path(args.additional_channel_filename), "r") as fh:
-            additional_channels = yaml.safe_load(fh)
-    except OSError as exc:
-        print(">> Error reading the file: {}".format(exc))
-        sys.exit(1)
 
-    # Add additional user-provided channel
-    print(">> Adding custom channels to base environment")
-    base_env["channels"].extend(additional_channels["channels"])
-
-if args.additional_deps_filename is not None:
+if args.additional_env_filename is not None:
     # Read user additional dependencies YAML file
     print(
-        ">> Reading base environment YAML file: {}".format(
+        ">> Reading additional environment YAML file: {}".format(
             pathlib.Path(args.additional_deps_filename)
         )
     )
     try:
         with open(pathlib.Path(args.additional_deps_filename), "r") as fh:
-            additional_deps = yaml.safe_load(fh)
+            additional_env = yaml.safe_load(fh)
     except OSError as exc:
         print(">> Error reading the file: {}".format(exc))
         sys.exit(1)
 
-    # Add additional dependencies and set user-provided name
+    # Add additional dependencies and channels and set user-provided name
     print(">> Adding custom dependencies to base environment")
-    base_env["dependencies"].extend(additional_deps["dependencies"])
+    if "dependencies" in additional_env:
+        base_env["dependencies"].extend(additional_env["dependencies"])
+    if "channels" in additional_env:
+        additional_env["channels"].extend(base_env["channels"])
+        base_env["channels"] = additional_env["channels"]
     base_env["name"] = "{}-{}".format(args.tag, args.version)
 
 # Write output YAML environment file
@@ -230,7 +218,8 @@ if args.build is True:
         print(">> Error building the docker image: {}".format(ext))
         print(
             ">> To see the full error, build the image manually with: "
-            "'docker build --build-arg inputyaml={} --build-arg psana_version={}:{} "
+            "'docker build --build-arg inputyaml={} "
+            "--build-arg psana_version={}:{} "
             "-t {}/{}:{} docker' and see the output of the command ".format(
                 args.output_filename,
                 args.tag,
@@ -255,7 +244,8 @@ if args.build is True:
 else:
     print(">> Not building docker image")
     print(
-        ">> To build the image manually: 'docker build --build-arg inputyaml={} "
+        ">> To build the image manually: 'docker build "
+        "--build-arg inputyaml={} "
         "--build-arg psana_version={}:{} -t {}/{}:{} docker'".format(
             args.output_filename,
             args.tag,
@@ -266,4 +256,42 @@ else:
         )
     )
     print(">> Use -d option to build the image automatically")
+
+if args.render is True:
+    print(">> Rendering container data to .travis.yml file")
+    jinja2_env = jinja2.Environment(loader=jinja2.FileSystemLoader("./"))
+    jinja2_template = jinja2_env.get_template("travis.yml.template")
+
+    create_container_args = "-r {} -t {} -v {} -o current.yml -b {}".format(
+        args.repository,
+        args.tag,
+        args.version,
+        args.base_env_filename,
+    )
+    if args.additional_env_filename is not None:
+        create_container_args = "{} -a {}".format(
+            create_container_args,
+            args.additional_env_filename,
+        )
+    docker_build_tag = "{}/{}:{}".format(
+        args.repository, args.tag, args.version
+    )
+    docker_build_args = (
+        "--build-arg inputyaml={} --build-arg psana_version={}:{} "
+        " -tag {}".format(
+            args.output_filename,
+            args.tag,
+            args.version,
+            docker_build_tag,
+        )
+    )
+    final_yaml = jinja2_template.render(
+        {
+            "create_container_args": create_container_args,
+            "docker_build_args": docker_build_args,
+            "docker_build_tag": docker_build_tag,
+        }
+    )
+    with open(".travis.yml", "w") as fh:
+        fh.writelines(final_yaml)
 print(">> Done!")

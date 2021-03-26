@@ -1,0 +1,22 @@
+sudo: required
+language: python
+
+services:
+  - docker
+
+env:
+  global:
+    - secure: travisEncryptedDOCKER_ACCOUNT
+    - secure: travisEncryptedDOCKER_PASSWORD
+
+before_install:
+  - pip install yaml docker jinja2
+  - export PATH=$PATH:$HOME/.local/bin
+
+script:
+  - python create-container.py {{ create_container_args }}
+  - docker build {{ docker_build_args }} docker
+
+after_success:
+  - docker login -u $DOCKER_ACCOUNT -p $DOCKER_PASS
+  - docker push {{ docker_build_tag }}
