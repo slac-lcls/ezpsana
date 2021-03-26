@@ -1,6 +1,5 @@
-name: ana-4.0.17
+name: ana-4.0.20
 channels:
-  - file:///cds/sw/ds/ana/conda1/channels/system-rhel7
   - /cds/sw/ds/ana/conda1/channels/system-rhel7
   - lcls-i
   - conda-forge
@@ -10,7 +9,6 @@ dependencies:
   - _openmp_mutex=4.5=1_llvm
   - alabaster=0.7.12=py_0
   - anaconda-client=1.7.2=py_0
-  - astropy=2.0.9=py27_0
   - atomicwrites=1.4.0=pyh9f0ad1d_0
   - attrs=20.3.0=pyhd3deb0d_0
   - babel=2.9.0=pyhd3deb0d_0
@@ -28,10 +26,9 @@ dependencies:
   - bokeh=1.4.0=py27_0
   - boost=1.72.0=py27h9de70de_0
   - boost-cpp=1.72.0=h8e57a91_0
-  - bottleneck=1.3.2=py27hc1659b7_0
   - brotlipy=0.7.0=py27h516909a_1000
   - bzip2=1.0.8=h7f98852_4
-  - c-ares=1.17.1=h36c2ea0_0
+  - c-ares=1.17.1=h7f98852_1
   - c-compiler=1.1.3=h7f98852_0
   - ca-certificates=2020.12.5=ha878542_0
   - cairo=1.16.0=hcf35c78_1003
@@ -62,7 +59,6 @@ dependencies:
   - dbus=1.13.6=hfdff14a_1
   - decorator=4.4.2=py_0
   - defusedxml=0.6.0=py_0
-  - dill=0.3.2=pyh9f0ad1d_0
   - distributed=1.28.1=py27_0
   - docutils=0.16=py27h8c360ce_1
   - eigen=3.3.9=h4bd325d_1
@@ -71,7 +67,6 @@ dependencies:
   - epicscorelibs=7.0.3.99.2.0=py27h68659b9_0
   - expat=2.2.10=h9c3ff4c_0
   - fabio=0.9.0=py27hc1659b7_2
-  - fast-histogram=0.7=py27hc1659b7_1000
   - ffmpeg=4.1.3=h167e202_0
   - fftw=3.3.8=nompi_h8cb7ab2_1114
   - flask=1.1.2=pyh9f0ad1d_0
@@ -91,9 +86,6 @@ dependencies:
   - giflib=5.2.1=h36c2ea0_2
   - git=2.30.0=pl5320h014a29a_0
   - glib=2.66.3=h58526e2_0
-  - glue-core=0.15.6=py27_1
-  - glue-vispy-viewers=0.12.2=py_0
-  - glueviz=0.15.2=0
   - glymur=0.8.19=pyh5ca1d4c_0
   - gmp=6.2.1=h58526e2_0
   - gnutls=3.6.13=h85f3911_1
@@ -163,7 +155,7 @@ dependencies:
   - libopencv=4.2.0=py27_2
   - libpng=1.6.37=h21135ba_2
   - libsodium=1.0.17=h516909a_0
-  - libssh2=1.9.0=hab1572f_5
+  - libssh2=1.9.0=ha56f1ee_6
   - libstdcxx-devel_linux-64=9.3.0=hb016644_18
   - libstdcxx-ng=9.3.0=h6de172a_18
   - libtiff=4.1.0=hc3755c2_3
@@ -175,7 +167,7 @@ dependencies:
   - libxml2=2.9.10=hee79883_0
   - libxslt=1.1.33=h31b3aaa_0
   - linecache2=1.0.0=py_1
-  - llvm-openmp=11.0.1=h4bd325d_0
+  - llvm-openmp=11.1.0=h4bd325d_0
   - llvmlite=0.31.0=py27h5ee40b5_1
   - lmfit=0.8.3=py27_1
   - locket=0.2.0=py_2
@@ -196,20 +188,19 @@ dependencies:
   - mongodb=4.2.7=h73928cc_0
   - more-itertools=5.0.0=py_0
   - mpi=1.0=openmpi
-  - mpi4py=3.0.3=py27he19ad75_5
-  - mpl-scatter-density=0.6=py_1
+  - mpi4py=3.0.3=py27h9ab638b_1
   - msgpack-python=0.6.2=py27hc9558a2_0
   - multipledispatch=0.6.0=py_0
   - nbconvert=5.6.1=py27_0
   - nbformat=4.4.0=py_1
   - ncurses=6.2=h58526e2_4
-  - ndarray-psana=1.1.8=hfe97a14_6
+  - ndarray-psana=1.1.8=hfe97a14_11
   - nettle=3.6=he412f7d_0
   - networkx=2.2=py_1
   - nose=1.3.7=py27h8c360ce_1004
   - notebook=5.7.8=py27_1
-  - nspr=4.29=h9c3ff4c_1
-  - nss=3.62=hb5efdd6_0
+  - nspr=4.30=h9c3ff4c_0
+  - nss=3.63=hb5efdd6_0
   - numba=0.47.0=py27hb3f55d8_0
   - numexpr=2.7.1=py27hb3f55d8_0
   - numpy=1.16.5=py27h95a1406_0
@@ -219,11 +210,11 @@ dependencies:
   - opencv=4.2.0=py27_2
   - openh264=1.8.0=hdbcaa40_1000
   - openjpeg=2.4.0=hf7af979_0
-  - openmpi=4.1.0=h425c746_1
+  - openmpi=4.1.0=hbfc84c5_4
   - openssl=1.1.1j=h7f98852_0
   - packaging=20.9=pyh44b312d_0
   - pandas=0.24.2=py27hb3f55d8_0
-  - pandoc=2.11.4=h7f98852_0
+  - pandoc=2.12=h7f98852_0
   - pandocfilters=1.4.2=py_1
   - panel=0.8.1=pyh9f0ad1d_1
   - param=1.10.1=pyhd3deb0d_0
@@ -241,9 +232,9 @@ dependencies:
   - pluggy=0.12.0=py_0
   - prometheus_client=0.9.0=pyhd3deb0d_0
   - prompt_toolkit=1.0.15=py_1
-  - psana=4.0.17=py27h4b7be54_0
-  - psgeom=1.1.2=pyhf84c159_7
-  - psocake=01.00.13=py27hd996060_7
+  - psana=4.0.20=py27h4b7be54_0
+  - psgeom=1.1.2=pyhf84c159_10
+  - psocake=00.06.03=py27hf5cd02e_7
   - psutil=5.7.0=py27hdf8410d_1
   - pthread-stubs=0.4=h36c2ea0_1001
   - ptyprocess=0.7.0=pyhd3deb0d_0
@@ -259,7 +250,6 @@ dependencies:
   - pygments=2.5.2=py_0
   - pykerberos=1.1.14=py27h2de3caf_2
   - pymongo=3.10.1=py27he1b5a44_0
-  - pyopengl=3.1.5=py_0
   - pyopenssl=19.1.0=py_1
   - pyparsing=2.4.7=pyh9f0ad1d_0
   - pyqt=5.12.3=py27hcca6a23_1
@@ -270,8 +260,8 @@ dependencies:
   - pytest=4.6.4=py27_0
   - python=2.7.15=h5a48372_1011_cpython
   - python-dateutil=2.8.1=py_0
-  - python-engineio=3.14.2=pyhd8ed1ab_0
-  - python-socketio=4.6.1=pyhd8ed1ab_0
+  - python-engineio=4.0.1=pyhd8ed1ab_0
+  - python-socketio=4.6.0=pyhd8ed1ab_0
   - python_abi=2.7=1_cp27mu
   - pytz=2020.1=pyh9f0ad1d_0
   - pyviz_comms=2.0.1=pyhd3deb0d_0
@@ -305,7 +295,7 @@ dependencies:
   - sortedcontainers=2.3.0=pyhd8ed1ab_0
   - sphinx=1.8.5=py27_0
   - sphinxcontrib-websupport=1.2.4=pyh9f0ad1d_0
-  - sqlite=3.34.0=h74cdb3f_0
+  - sqlite=3.35.2=h74cdb3f_0
   - statsmodels=0.10.2=py27hc1659b7_0
   - subprocess32=3.5.4=py27h516909a_0
   - supervisor=4.1.0=py27_0
@@ -316,13 +306,13 @@ dependencies:
   - tk=8.6.10=h21135ba_1
   - toolz=0.10.0=py_0
   - tornado=5.1.1=py27h14c3975_1000
-  - tqdm=4.58.0=pyhd8ed1ab_0
+  - tqdm=4.59.0=pyhd8ed1ab_0
   - traceback2=1.4.0=py27_0
   - traitlets=4.3.3=py27h8c360ce_1
   - typing=3.7.4.1=py27h8c360ce_1
   - tzlocal=2.1=pyh9f0ad1d_0
   - unittest2=1.1.0=py_0
-  - urllib3=1.26.3=pyhd8ed1ab_0
+  - urllib3=1.26.4=pyhd8ed1ab_0
   - virtualenv=16.7.5=py_0
   - wcwidth=0.2.5=pyh9f0ad1d_2
   - webencodings=0.5.1=py_1
@@ -331,20 +321,19 @@ dependencies:
   - widgetsnbextension=3.5.1=pyh9f0ad1d_3
   - x264=1!152.20180806=h14c3975_0
   - xarray=0.11.3=py27_0
-  - xlrd=1.2.0=pyh9f0ad1d_1
   - xorg-kbproto=1.0.7=h7f98852_1002
-  - xorg-libice=1.0.10=h516909a_0
-  - xorg-libsm=1.2.3=h84519dc_1000
-  - xorg-libx11=1.6.12=h516909a_0
+  - xorg-libice=1.0.10=h7f98852_0
+  - xorg-libsm=1.2.3=hd9c2040_1000
+  - xorg-libx11=1.7.0=h7f98852_0
   - xorg-libxau=1.0.9=h7f98852_0
   - xorg-libxdmcp=1.1.3=h7f98852_0
-  - xorg-libxext=1.3.4=h516909a_0
-  - xorg-libxrender=0.9.10=h516909a_1002
-  - xorg-renderproto=0.11.1=h14c3975_1002
+  - xorg-libxext=1.3.4=h7f98852_1
+  - xorg-libxrender=0.9.10=h7f98852_1003
+  - xorg-renderproto=0.11.1=h7f98852_1002
   - xorg-xextproto=7.3.0=h7f98852_1002
   - xorg-xproto=7.0.31=h7f98852_1007
   - xraylib=3.3.0=py27h7127e17_2
-  - xtcav2=0.3=py27hd996060_6
+  - xtcav2=0.3=py27hd996060_8
   - xz=5.2.5=h516909a_1
   - yaml=0.2.5=h516909a_0
   - yaml-cpp=0.6.3=he1b5a44_4
@@ -352,9 +341,9 @@ dependencies:
   - zict=2.0.0=py_0
   - zipp=1.0.0=py_0
   - zlib=1.2.11=h516909a_1010
-  - zstd=1.4.8=ha95c52a_1
+  - zstd=1.4.9=ha95c52a_0
   - pip:
     - pyqt5-sip==4.19.18
     - pyqtwebengine==5.12.1
-prefix: /cds/sw/ds/ana/conda1/inst/envs/ana-4.0.17
+prefix: /cds/sw/ds/ana/conda1/inst/envs/ana-4.0.20
 
