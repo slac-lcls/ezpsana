@@ -109,20 +109,6 @@ except OSError as exc:
     print(">> Error reading the file: {}".format(exc))
     sys.exit(1)
 
-# Strip build strings for openmpi and mpi
-# This is needed because the environments come
-# with custom LSF-enabled MPI packages that are
-# not available on conda-forge. When we switch to
-# SLURM and can use the conda-forge packages, this
-# part can be removed
-base_env["dependencies"] = [
-    remove_build_string(entry)
-    if not isinstance(entry, dict)
-    and (entry.startswith("openmpi") or entry.startswith("mpi4py"))
-    else entry
-    for entry in base_env["dependencies"]
-]
-
 # Remove pyopengl if present in the environment
 # The "glue" packages are currently removed, but
 # this  part of the script will be obsolete once
@@ -133,13 +119,6 @@ base_env["dependencies"] = [
     if not isinstance(entry, dict)
     and not entry.startswith("pyopengl")
     and not entry.startswith("glue")
-]
-
-# Remove the LCLS custom channels
-base_env["channels"] = [
-    entry
-    for entry in base_env["channels"]
-    if not entry.startswith("file://") and not entry.startswith("/")
 ]
 
 if args.additional_env_filename is not None:
