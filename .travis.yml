@@ -1,7 +1,11 @@
+# Do not edit, generated automatically
+# by the create-container.py script.
+# Last updated on: 2021-03-26T17:51:50-07:00
+
 on:
   tags: true
     all_branches: true
-    condition: "$TRAVIS_TAG =~ ^render-.*$"
+    condition: "$TRAVIS_TAG =~ ^build-.*$"
 
 sudo: required
 
