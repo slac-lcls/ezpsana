@@ -1,3 +1,7 @@
+# Do not edit, generated automatically
+# by the create-container.py script.
+# Last updated on: {{ last_update }}
+
 on:
   tags: true
     all_branches: true

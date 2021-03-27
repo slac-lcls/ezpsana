@@ -1,6 +1,7 @@
 #!/bin/env python
 
 import argparse
+import datetime
 import pathlib
 import sys
 
@@ -269,6 +270,10 @@ if args.render is True:
             "create_container_args": create_container_args,
             "docker_build_args": docker_build_args,
             "docker_build_tag": docker_build_tag,
+            "last_update": datetime.datetime.now()
+            .astimezone()
+            .replace(microsecond=0)
+            .isoformat(),
         }
     )
     with open(".travis.yml", "w") as fh:
