@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-03-30T09:55:54-07:00
+# Last updated on: 2021-03-30T11:58:56-07:00
 
 sudo: required
 
@@ -12,7 +12,7 @@ services:
 #if: branch = master AND tag =~ ^build-.*$
 
 install:
-  - pip install yaml docker jinja2
+  - pip install pyyaml docker jinja2
   - export PATH=$PATH:$HOME/.local/bin
 
 script:
