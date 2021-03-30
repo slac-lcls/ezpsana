@@ -9,7 +9,7 @@ language: python
 services:
   - docker
 
-#if: branch = master AND tag =~ ^build-.*$
+if: branch = master AND tag =~ ^build-.*$
 
 install:
   - pip install pyyaml docker jinja2
