@@ -258,7 +258,7 @@ if args.render is True:
     )
     docker_build_args = (
         "--build-arg inputyaml={} --build-arg psana_version={}:{} "
-        " -tag {}".format(
+        "--tag {}".format(
             args.output_filename,
             args.tag,
             args.version,
