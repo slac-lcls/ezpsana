@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-03-30T11:58:56-07:00
+# Last updated on: 2021-03-30T12:12:22-07:00
 
 sudo: required
 
@@ -17,7 +17,7 @@ install:
 
 script:
   - python create-container.py -r slaclcls -t ana -v 4.0.20-py3 -o current.yml -b yaml/ana-latest-py3.yml
-  - docker build --build-arg inputyaml=current.yaml --build-arg psana_version=ana:4.0.20-py3  -tag slaclcls/ana:4.0.20-py3 docker
+  - docker build --build-arg inputyaml=current.yaml --build-arg psana_version=ana:4.0.20-py3 --tag slaclcls/ana:4.0.20-py3 docker
 
 after_success:
   - docker login -u $DOCKER_ACCOUNT -p $DOCKER_PASSWORD
