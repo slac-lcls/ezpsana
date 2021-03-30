@@ -12,7 +12,7 @@ services:
 #if: branch = master AND tag =~ ^build-.*$
 
 install:
-  - pip install yaml docker jinja2
+  - pip install pyyaml docker jinja2
   - export PATH=$PATH:$HOME/.local/bin
 
 script:
