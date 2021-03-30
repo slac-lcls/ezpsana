@@ -242,10 +242,11 @@ if args.render is True:
     jinja2_env = jinja2.Environment(loader=jinja2.FileSystemLoader("./"))
     jinja2_template = jinja2_env.get_template("travis.yml.template")
 
-    create_container_args = "-r {} -t {} -v {} -o current.yml -b {}".format(
+    create_container_args = "-r {} -t {} -v {} -o {} -b {}".format(
         args.repository,
         args.tag,
         args.version,
+        args.output_filename,
         args.base_env_filename,
     )
     if args.additional_env_filename is not None:
