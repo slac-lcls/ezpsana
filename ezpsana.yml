@@ -9,4 +9,6 @@ dependencies:
   - scipy
   - matplotlib
   - jinja2
-  - docker
+  - pip
+  - pip:
+    - docker
