@@ -17,7 +17,7 @@ All psana-based containers that we build are stored at the following [URL](https
 Have a look there! If you don't find what you are looking for, proceed to the next step...
 
 #### Create your container
-In order to run the following script, make sure your `python` has the `docker` module. If not, `pip install docker`.
+In order to run the following script, make sure your `python` has the `docker` module. If not, `pip install docker`. If you want, you can also run it in the `ezpsana` environment that you could create with `conda env create -f ezpsana.yml`.
 
 ```bash
 (env)[terminal]$ python create-container.py -h
@@ -42,6 +42,14 @@ optional arguments:
   -t TAG, --tag TAG     Tag for the docker image
   -v VERSION, --version VERSION
                         Version for the docker image
+```
+
+Below is an example where the container is built with Travis (you need credentials for it to work):
+```bash
+python create-container.py -b yaml/ana-4.0.20-py3.yml -a yaml/skopi_env.yml -o build-skopi_env-ana.yml -e -c -r slaclcls -t skopi-ana -v 4.0.20-py3
+git add .travis.yml
+git tag -a build-skopi-ana-4.0.20-py3 -m "attempt at updating ana-skopi with h5py-mpi"
+git push slac build-skopi-ana-4.0.20-py3
 ```
 
 ### Run your container
