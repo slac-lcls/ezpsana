@@ -126,11 +126,11 @@ if args.additional_env_filename is not None:
     # Read user additional dependencies YAML file
     print(
         ">> Reading additional environment YAML file: {}".format(
-            pathlib.Path(args.additional_deps_filename)
+            pathlib.Path(args.additional_env_filename)
         )
     )
     try:
-        with open(pathlib.Path(args.additional_deps_filename), "r") as fh:
+        with open(pathlib.Path(args.additional_env_filename), "r") as fh:
             additional_env = yaml.safe_load(fh)
     except OSError as exc:
         print(">> Error reading the file: {}".format(exc))

@@ -1,0 +1,12 @@
+name: ezpsana
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - yaml
+  - python=3.7
+  - numpy
+  - scipy
+  - matplotlib
+  - jinja2
+  - docker
