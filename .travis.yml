@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-04-20T14:09:59-07:00
+# Last updated on: 2021-05-25T12:23:08-07:00
 
 sudo: required
 
@@ -16,9 +16,9 @@ install:
   - export PATH=$PATH:$HOME/.local/bin
 
 script:
-  - python create-container.py -r slaclcls -t skopi-ana -v 4.0.20-py3 -o build-skopi_env-ana.yml -b yaml/ana-4.0.20-py3.yml -a yaml/skopi_env.yml
-  - docker build --build-arg inputyaml=build-skopi_env-ana.yml --build-arg psana_version=skopi-ana:4.0.20-py3 --tag slaclcls/skopi-ana:4.0.20-py3 docker
+  - python create-container.py -r slaclcls -t ana -v 4.0.23 -o ana-4.0.23.yml -b yaml/ana-4.0.23.yml
+  - docker build --build-arg inputyaml=ana-4.0.23.yml --build-arg psana_version=ana:4.0.23 --tag slaclcls/ana:4.0.23 docker
 
 after_success:
   - docker login -u $DOCKER_ACCOUNT -p $DOCKER_PASSWORD
-  - docker push slaclcls/skopi-ana:4.0.20-py3
+  - docker push slaclcls/ana:4.0.23
