@@ -1,6 +1,5 @@
 name: ana-4.0.23
 channels:
-  - /cds/sw/ds/ana/conda1/channels/system-rhel7
   - lcls-i
   - conda-forge
   - defaults
