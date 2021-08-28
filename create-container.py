@@ -87,11 +87,11 @@ parser.add_argument(
     required=True,
 )
 parser.add_argument(
-    "-v",
-    "--version",
-    dest="version",
+    "-u",
+    "--useraccount",
+    dest="useraccount",
     type=str,
-    help="Version for the docker image",
+    help="User account for the docker image",
     action="store",
     required=True,
 )
@@ -165,7 +165,7 @@ if args.build is True:
     print(
         ">> Building docker image with tag: {}/{}:{}. "
         "Please wait (it can take several minutes)".format(
-            args.repository, args.tag, args.version
+            args.useraccount, args.repository, args.tag
         )
     )
     try:
@@ -184,10 +184,10 @@ if args.build is True:
             rm=True,
             pull=True,
             nocache=args.nocache,
-            tag="{}/{}:{}".format(args.repository, args.tag, args.version),
+            tag="{}/{}:{}".format(args.useraccount, args.repository, args.tag),
             buildargs={
                 "inputyaml": args.output_filename,
-                "psana_version": "{}:{}".format(args.tag, args.version),
+                "psana_version": "{}:{}".format(args.repository, args.tag),
             },
         )
     except TypeError as ext:
@@ -202,23 +202,23 @@ if args.build is True:
             "--build-arg psana_version={}:{} "
             "-t {}/{}:{} docker' and see the output of the command ".format(
                 args.output_filename,
-                args.tag,
-                args.version,
                 args.repository,
                 args.tag,
-                args.version,
+                args.useraccount,
+                args.repository,
+                args.tag,
             )
         )
         sys.exit(1)
     print(
         ">> Image {}/{}:{} built. It can be found in the 'docker images' "
-        "list".format(args.repository, args.tag, args.version)
+        "list".format(args.useraccount, args.repository, args.tag)
     )
     print(">> To upload the image to DockerHub:")
     print(">> 'docker login'")
     print(
         ">> 'docker push {}/{}:{}'".format(
-            args.repository, args.tag, args.version
+            args.useraccount, args.repository, args.tag
         )
     )
 else:
@@ -228,11 +228,11 @@ else:
         "--build-arg inputyaml={} "
         "--build-arg psana_version={}:{} -t {}/{}:{} docker'".format(
             args.output_filename,
-            args.tag,
-            args.version,
             args.repository,
             args.tag,
-            args.version,
+            args.useraccount,
+            args.repository,
+            args.tag,
         )
     )
     print(">> Use -d option to build the image automatically")
@@ -242,10 +242,10 @@ if args.render is True:
     jinja2_env = jinja2.Environment(loader=jinja2.FileSystemLoader("./"))
     jinja2_template = jinja2_env.get_template("travis.yml.template")
 
-    create_container_args = "-r {} -t {} -v {} -o {} -b {}".format(
+    create_container_args = "-u {} -r {} -t {} -o {} -b {}".format(
+        args.useraccount,
         args.repository,
         args.tag,
-        args.version,
         args.output_filename,
         args.base_env_filename,
     )
@@ -255,14 +255,14 @@ if args.render is True:
             args.additional_env_filename,
         )
     docker_build_tag = "{}/{}:{}".format(
-        args.repository, args.tag, args.version
+        args.useraccount, args.repository, args.tag
     )
     docker_build_args = (
         "--build-arg inputyaml={} --build-arg psana_version={}:{} "
         "--tag {}".format(
             args.output_filename,
+            args.repository,
             args.tag,
-            args.version,
             docker_build_tag,
         )
     )
