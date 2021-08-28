@@ -365,4 +365,3 @@ dependencies:
 - zstd=1.5.0=ha95c52a_0
 - cudatoolkit=10.2
 - cupy
-prefix: /cds/sw/ds/ana/conda1/inst/envs/ana-4.0.28-py3
