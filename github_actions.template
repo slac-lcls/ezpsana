@@ -27,6 +27,6 @@ jobs:
         - name: build container
           run: docker build {{ docker_build_args }} docker
         - name: login to DockerHub
-          {% raw %}run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p password: ${{ secrets.DOCKERHUB_TOKEN }}{% endraw %}
+          {% raw %}run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}{% endraw %}
         - name: upload container
           run: docker push {{ docker_build_tag }}
