@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-09-24T11:36:32-07:00
+# Last updated on: 2021-09-24T12:13:22-07:00
 
 name: ezpsana
 on:
@@ -21,10 +21,10 @@ jobs:
         - name: install dependencies
           run: pip install pyyaml docker jinja2
         - name: create yaml file
-          run: python create-container.py -r slaclcls -t ana -v 4.0.28 -o ana-4.0.28.yml -b yaml/ana-4.0.28.yml
+          run: python create-container.py -r slaclcls -t ana -v 4.0.27-py3 -o ana-4.0.27-py3.yml -b yaml/ana-4.0.27-py3.yml
         - name: build container
-          run: docker build --build-arg inputyaml=ana-4.0.28.yml --build-arg psana_version=ana:4.0.28 --tag slaclcls/ana:4.0.28 docker
+          run: docker build --build-arg inputyaml=ana-4.0.27-py3.yml --build-arg psana_version=ana:4.0.27-py3 --tag slaclcls/ana:4.0.27-py3 docker
         - name: login to DockerHub
           run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
         - name: upload container
-          run: docker push slaclcls/ana:4.0.28
+          run: docker push slaclcls/ana:4.0.27-py3
