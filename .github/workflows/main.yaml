@@ -1,12 +1,10 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-09-23T23:26:36-07:00
+# Last updated on: 2021-09-24T00:02:59-07:00
 
 name: ezpsana
 on:
   push:
-    branches:
-      - master
     tags:
       - 'build-*'
 
@@ -14,6 +12,9 @@ jobs:
     build-container:
       runs-on: ubuntu-latest
       steps:
+        - name: Exit if not on master branch
+          if: endsWith(github.ref, 'master') == false
+          run: exit -1
         - name: checkout
           uses: actions/checkout@v2
         - name: setup python
@@ -23,10 +24,10 @@ jobs:
         - name: install dependencies
           run: pip install pyyaml docker jinja2
         - name: create yaml file
-          run: python create-container.py -r slaclcls -t test -v 4.0.99-py3 -o ana-4.0.28.py3.yml -b yaml/ana-4.0.28-py3.yml
+          run: python create-container.py -r slaclcls -t test -v 4.0.28-py3 -o ana-4.0.28-py3.yml -b yaml/ana-4.0.28-py3.yml
         - name: build container
-          run: docker build --build-arg inputyaml=ana-4.0.28.py3.yml --build-arg psana_version=test:4.0.99-py3 --tag slaclcls/test:4.0.99-py3 docker
+          run: docker build --build-arg inputyaml=ana-4.0.28-py3.yml --build-arg psana_version=test:4.0.28-py3 --tag slaclcls/test:4.0.28-py3 docker
         - name: login to DockerHub
           run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
         - name: upload container
-          run: docker push slaclcls/test:4.0.99-py3
+          run: docker push slaclcls/test:4.0.28-py3
