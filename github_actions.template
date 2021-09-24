@@ -5,13 +5,12 @@
 name: ezpsana
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'build-*'
 
 jobs:
     build-container:
       runs-on: ubuntu-latest
-      {% raw %}if: ${{ startsWith('refs/tags/build-', github.ref) }}{% endraw %}
       steps:
         - name: checkout
           uses: actions/checkout@v2
