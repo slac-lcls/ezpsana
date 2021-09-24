@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-09-24T00:02:59-07:00
+# Last updated on: 2021-09-24T00:09:44-07:00
 
 name: ezpsana
 on:
@@ -13,7 +13,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Exit if not on master branch
-          if: endsWith(github.ref, 'master') == false
+          if: github.ref != 'refs/heads/master'
           run: exit -1
         - name: checkout
           uses: actions/checkout@v2
