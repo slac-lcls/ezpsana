@@ -11,10 +11,8 @@ on:
 jobs:
     build-container:
       runs-on: ubuntu-latest
+      if: ${{ github.ref == 'refs/heads/master' }}
       steps:
-        - name: Exit if not on master branch
-          if: github.ref != 'refs/heads/master'
-          run: exit -1
         - name: checkout
           uses: actions/checkout@v2
         - name: setup python
