@@ -1,17 +1,17 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2021-09-24T00:18:18-07:00
+# Last updated on: 2021-09-24T00:24:48-07:00
 
 name: ezpsana
 on:
   push:
-    tags:
-      - 'build-*'
+    branches:
+      - master
 
 jobs:
     build-container:
       runs-on: ubuntu-latest
-      if: ${{ github.ref == 'refs/heads/master' }}
+      if: ${{ startsWith('refs/tags/build-', github.ref) }}
       steps:
         - name: checkout
           uses: actions/checkout@v2
