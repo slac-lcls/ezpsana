@@ -58,7 +58,7 @@ parser.add_argument(
     "-e",
     "--render-travis-file",
     dest="render",
-    help="Render build into the .travis.yml file",
+    help="Render build into the .github/workflows/main.yml file",
     action="store_true",
 )
 parser.add_argument(
@@ -238,9 +238,9 @@ else:
     print(">> Use -d option to build the image automatically")
 
 if args.render is True:
-    print(">> Rendering container data to .travis.yml file")
+    print(">> Rendering container data to .github/workflows/main.yaml file")
     jinja2_env = jinja2.Environment(loader=jinja2.FileSystemLoader("./"))
-    jinja2_template = jinja2_env.get_template("travis.yml.template")
+    jinja2_template = jinja2_env.get_template("github_actions.template")
 
     create_container_args = "-r {} -t {} -v {} -o {} -b {}".format(
         args.repository,
@@ -277,6 +277,6 @@ if args.render is True:
             .isoformat(),
         }
     )
-    with open(".travis.yml", "w") as fh:
+    with open(".github/workflows/main.yaml", "w") as fh:
         fh.writelines(final_yaml)
 print(">> Done!")

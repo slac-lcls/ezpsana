@@ -1,0 +1,30 @@
+# Do not edit, generated automatically
+# by the create-container.py script.
+# Last updated on: {{ last_update }}
+
+name: ezpsana
+on:
+  push:
+    tags:
+      - 'build-*'
+
+jobs:
+    build-container:
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout
+          uses: actions/checkout@v2
+        - name: setup python
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.x
+        - name: install dependencies
+          run: pip install pyyaml docker jinja2
+        - name: create yaml file
+          run: python create-container.py {{ create_container_args }}
+        - name: build container
+          run: docker build {{ docker_build_args }} docker
+        - name: login to DockerHub
+          {% raw %}run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}{% endraw %}
+        - name: upload container
+          run: docker push {{ docker_build_tag }}
