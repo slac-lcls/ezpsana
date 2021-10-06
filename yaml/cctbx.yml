@@ -1,0 +1,25 @@
+channels:
+  - cctbx
+dependencies:
+  - biopython
+  - pytest-xdist
+  - pytest-mock
+  - docutils
+  - sphinx
+  - reportlab
+  - wxpython
+  - pyopengl
+  - hdf5plugin
+  - libsvm
+  - mrcfile
+  - distro
+  - pybind11
+  - libsvm_py
+  - orderedset
+  - procrunner
+  - python-blosc
+  - eigen
+  - dials-data
+  - tabulate
+  - PyRTF
+  - mysql-connector-python
