@@ -27,7 +27,7 @@ jobs:
         - name: login to DockerHub
           uses: docker/login-action@v1
           with:
-            {% raw %}username: ${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}
-            {% raw %}password: ${{ secrets.DOCKERHUB_TOKEN }}{% endraw %}
+            {% raw %}username: ${{ secrets.DOCKERHUB_FRED_USERNAME }}{% endraw %}
+            {% raw %}password: ${{ secrets.DOCKERHUB_FRED_TOKEN }}{% endraw %}
         - name: upload container
           run: docker push {{ docker_build_tag }}
