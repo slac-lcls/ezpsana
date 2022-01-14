@@ -1,4 +1,4 @@
 dependencies:
   - pip:
     - torch>=1.0
-    - tensorboard
+    - tensorflow-tensorboard

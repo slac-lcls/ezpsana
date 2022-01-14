@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2022-01-14T08:55:44-08:00
+# Last updated on: 2022-01-14T09:12:16-08:00
 
 name: ezpsana
 on:
@@ -27,7 +27,7 @@ jobs:
         - name: login to DockerHub
           uses: docker/login-action@v1
           with:
-            username: ${{ secrets.DOCKERHUB_FRED_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_FRED_TOKEN }}
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
         - name: upload container
           run: docker push fpoitevi/peaknet-ana:4.0.35
