@@ -44,12 +44,12 @@ optional arguments:
                         Version for the docker image
 ```
 
-Below is an example where the container is built with Travis (you need credentials for it to work):
+Below is an example where the container is built with GitHub Actions:
 ```bash
-python create-container.py -b yaml/ana-4.0.20-py3.yml -a yaml/skopi_env.yml -o build-skopi_env-ana.yml -e -c -r slaclcls -t skopi-ana -v 4.0.20-py3
-git add .travis.yml
-git tag -a build-skopi-ana-4.0.20-py3 -m "attempt at updating ana-skopi with h5py-mpi"
-git push slac build-skopi-ana-4.0.20-py3
+python create-container.py -b yaml/ana-4.0.35.yml -o ana-4.0.35.yml -e -c -r fpoitevi -t ana -v 4.0.35
+git add .github/workflows/main.yml
+git tag -a build-ana-4.0.35 -m "attempt at building psana and pushing it to fpoitevi's DockerHub"
+git push origin build-ana-4.0.35
 ```
 
 ### Run your container

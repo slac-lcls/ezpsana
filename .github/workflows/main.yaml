@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2022-01-13T17:17:06-08:00
+# Last updated on: 2022-01-13T17:29:48-08:00
 
 name: ezpsana
 on:
@@ -21,10 +21,10 @@ jobs:
         - name: install dependencies
           run: pip install pyyaml docker jinja2
         - name: create yaml file
-          run: python create-container.py -r fpoitevi -t peaknet-ana -v 4.0.35 -o peaknet-ana-4.0.35.yml -b yaml/ana-4.0.35.yml -a yaml/peaknet.yml
+          run: python create-container.py -r fpoitevi -t ana -v 4.0.35 -o ana-4.0.35.yml -b yaml/ana-4.0.35.yml
         - name: build container
-          run: docker build --build-arg inputyaml=peaknet-ana-4.0.35.yml --build-arg psana_version=peaknet-ana:4.0.35 --tag fpoitevi/peaknet-ana:4.0.35 docker
+          run: docker build --build-arg inputyaml=ana-4.0.35.yml --build-arg psana_version=ana:4.0.35 --tag fpoitevi/ana:4.0.35 docker
         - name: login to DockerHub
           run: docker login -u ${{ secrets.DOCKERHUB_FRED_USERNAME }} -p ${{ secrets.DOCKERHUB_FRED_TOKEN }}
         - name: upload container
-          run: docker push fpoitevi/peaknet-ana:4.0.35
+          run: docker push fpoitevi/ana:4.0.35
