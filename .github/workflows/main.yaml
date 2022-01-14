@@ -24,7 +24,10 @@ jobs:
           run: python create-container.py -r fpoitevi -t ana -v 4.0.35 -o ana-4.0.35.yml -b yaml/ana-4.0.35.yml
         - name: build container
           run: docker build --build-arg inputyaml=ana-4.0.35.yml --build-arg psana_version=ana:4.0.35 --tag fpoitevi/ana:4.0.35 docker
-        - name: login to DockerHub
-          run: docker login -u ${{ secrets.DOCKERHUB_FRED_USERNAME }} -p ${{ secrets.DOCKERHUB_FRED_TOKEN }}
+        - name: Login to Docker Hub
+          uses: docker/login-action@v1
+          with:
+            username: ${{ secrets.DOCKERHUB_FRED_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_FRED_TOKEN }}
         - name: upload container
           run: docker push fpoitevi/ana:4.0.35
