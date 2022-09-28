@@ -14,7 +14,8 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     rm /root/Miniconda3-latest-Linux-x86_64.sh
 
 COPY $inputyaml /root/$inputyaml
-RUN . /opt/anaconda/etc/profile.d/conda.sh && conda update -c conda-forge conda
+RUN . /opt/anaconda/etc/profile.d/conda.sh && \
+    conda update -c conda-forge conda
 RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda env create -n ana -f ${inputyaml} && \
     conda clean -afy
@@ -23,7 +24,7 @@ WORKDIR /home/psana2-build
 
 RUN git clone https://github.com/apeck12/lcls2.git
 RUN cd lcls2 && \
-    source /opt/anaconda/etc/profile.d/conda.sh && \
+    . /opt/anaconda/etc/profile.d/conda.sh && \
     conda activate ana && \
     export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
     export PYTHONPATH=$RELDIR/install/lib/python3.10/site-packages && \
