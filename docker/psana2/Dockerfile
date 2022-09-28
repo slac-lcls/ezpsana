@@ -1,11 +1,12 @@
 FROM debian:buster
+
 ARG inputyaml
 
 WORKDIR /root
 
 RUN apt-get -y update && \
     apt-get -y install git wget vim emacs tmux screen openssh-client && \
-    rm -rf /var/lib/apt/lists/* \
+    rm -rf /var/lib/apt/lists/*
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     chmod +x /root/Miniconda3-latest-Linux-x86_64.sh && \
