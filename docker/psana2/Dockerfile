@@ -11,7 +11,7 @@ RUN apt-get -y update && \
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     chmod +x /root/Miniconda3-latest-Linux-x86_64.sh && \
     /root/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda && \
-    rm /root/Miniconda3-latest-Linux-x86_64.sh \
+    rm /root/Miniconda3-latest-Linux-x86_64.sh
 
 COPY $inputyaml /root/$inputyaml
 RUN . /opt/anaconda/etc/profile.d/conda.sh && conda update -c conda-forge conda
