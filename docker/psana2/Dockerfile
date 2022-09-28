@@ -32,5 +32,5 @@ RUN cd lcls2 && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
     ./build_all.sh
 
-ADD docker/psana2/entrypoint.sh /opt/entrypoint.sh
+ADD entrypoint.sh /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
