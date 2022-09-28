@@ -6,7 +6,7 @@ name: ezpsana
 on:
   push:
     tags:
-      - 'build-*'
+      - 'build-ana-*'
 
 jobs:
     build-container:
