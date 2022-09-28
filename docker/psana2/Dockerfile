@@ -22,10 +22,11 @@ RUN . /opt/anaconda/etc/profile.d/conda.sh && \
 WORKDIR /home/psana2-build
 
 RUN git clone https://github.com/apeck12/lcls2.git
-RUN cd lcls2 &&  \
+RUN cd lcls2 && \
+    source /opt/anaconda/etc/profile.d/conda.sh && \
+    conda activate ana && \
     export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
-    pyver=$(python -c "import sys; print(str(sys.version_info.major)+'.'+str(sys.version_info.minor))") &&  \
-    export PYTHONPATH=$RELDIR/install/lib/python$pyver/site-packages && \
+    export PYTHONPATH=$RELDIR/install/lib/python3.10/site-packages && \
     export TESTRELDIR=$RELDIR/install && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
     ./build_all.sh
