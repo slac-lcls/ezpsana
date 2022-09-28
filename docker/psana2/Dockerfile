@@ -30,7 +30,13 @@ RUN cd lcls2 && \
     export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
     export TESTRELDIR=/home/psana2-build/lcls2/install && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
-    ./build_all.sh
+    ./build_all.sh \
+
+WORKDIR /home/btx-build
+
+RUN git clone https://github.com/lcls-users/btx.git
+RUN cd btx && \
+    git checkout psana2_demo
 
 ADD entrypoint.sh /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
