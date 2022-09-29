@@ -8,7 +8,13 @@ RUN apt-get -y update && \
     apt-get -y install git wget vim emacs tmux screen openssh-client && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+SHELL ["/bin/bash", "-c"]
+
+RUN export CC=cc && \
+    export CXX=CC && \
+    export MPI4PY_CC="\$(which cc)" && \
+    export MPI4PY_MPICC="\$(which cc) --shared" && \
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     chmod +x /root/Miniconda3-latest-Linux-x86_64.sh && \
     /root/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda && \
     rm /root/Miniconda3-latest-Linux-x86_64.sh
@@ -18,6 +24,7 @@ RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda update -c conda-forge conda
 RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda env create -n ana -f ${inputyaml} && \
+    conda uninstall -y --force mpich && \
     conda clean -afy
 
 WORKDIR /home/psana2-build
@@ -32,11 +39,13 @@ RUN cd lcls2 && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
     ./build_all.sh \
 
-WORKDIR /home/btx-build
-
 RUN git clone https://github.com/lcls-users/btx.git
 RUN cd btx && \
-    git checkout psana2_demo
+    git checkout psana2_demo \
+
+RUN /sbin/ldconfig
 
 ADD entrypoint.sh /opt/entrypoint.sh
-ENTRYPOINT ["/opt/entrypoint.sh"]
+WORKDIR /opt
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
