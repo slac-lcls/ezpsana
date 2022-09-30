@@ -1,6 +1,6 @@
 # Do not edit, generated automatically
 # by the create-container.py script.
-# Last updated on: 2022-09-30T13:46:35-07:00
+# Last updated on: 2022-09-30T14:52:50-07:00
 
 name: tpprwr
 on:
@@ -21,13 +21,13 @@ jobs:
         - name: install dependencies
           run: pip install pyyaml docker jinja2
         - name: create yaml file
-          run: python create-container.py -r fpoitevi -t ana -v 4.4.10 -o ana-4.4.10.yml -b yaml/psana2/env_create.yaml
+          run: python create-container.py -r fpoitevi -t ana -v slac-4.4.10 -o slac-ana-4.4.10.yml -b yaml/psana2/env_create.yaml -a yaml/psana2/slac-version.yml
         - name: build container
-          run: docker build --build-arg inputyaml=ana-4.4.10.yml --build-arg psana_version=ana:4.4.10 --tag fpoitevi/ana:4.4.10 docker
+          run: docker build --build-arg inputyaml=slac-ana-4.4.10.yml --build-arg psana_version=ana:slac-4.4.10 --tag fpoitevi/ana:slac-4.4.10 docker
         - name: login to DockerHub
           uses: docker/login-action@v1
           with:
             username: ${{ secrets.DOCKERHUB_FRED_USERNAME }}
             password: ${{ secrets.DOCKERHUB_FRED_TOKEN }}
         - name: upload container
-          run: docker push fpoitevi/ana:4.4.10
+          run: docker push fpoitevi/ana:slac-4.4.10
