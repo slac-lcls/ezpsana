@@ -1,3 +1,8 @@
+### psana2
+```bash
+ scp fpoitevi@psexport.slac.stanford.edu:/cds/sw/ds/ana/conda2/manage/env_create.yaml .
+```
+
 ### Skopi
 (the following needs to be checked; tagging was done a posteriori for now)
 ```bash
@@ -8,8 +13,9 @@ docker push slaclcls/skopi-ana:latest
 ```
 
 ### Dragonfly
+(this needs to be fixed as well)
 ```bash
-docker build -f docker/Dockerfile.dragonfly -t slaclcls/dragonfly-ana:4.0.17 docker
+docker build -f docker/dragonfly/Dockerfile -t slaclcls/dragonfly-ana:4.0.17 docker???
 docker push slaclcls/dragonfly-ana:4.0.17
 docker tag laclcls/dragonfly-ana:4.0.17 slaclcls/dragonfly-ana:latest
 docker push slaclcls/dragonfly-ana:latest

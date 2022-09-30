@@ -86,4 +86,3 @@ dependencies:
   - holoviews
   - panel
   - aes-stream-drivers
-  - mpich=3.3.2

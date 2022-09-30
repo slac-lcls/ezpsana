@@ -24,6 +24,9 @@ RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda update -c conda-forge conda
 RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda env create -n ana -f ${inputyaml} && \
+    conda clean -afy \
+
+RUN . /opt/anaconda/etc/profile.d/conda.sh && \
     conda activate ana && \
     conda uninstall -y --force mpich && \
     conda clean -afy

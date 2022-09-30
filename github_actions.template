@@ -2,7 +2,7 @@
 # by the create-container.py script.
 # Last updated on: {{ last_update }}
 
-name: ezpsana
+name: tpprwr
 on:
   push:
     tags:
