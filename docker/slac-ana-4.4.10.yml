@@ -85,5 +85,5 @@ dependencies:
 - holoviews
 - panel
 - aes-stream-drivers
-- psana=4.4.10
+- psana
 name: ana-slac-4.4.10
