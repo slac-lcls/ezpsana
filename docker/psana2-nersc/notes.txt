@@ -1,0 +1,1 @@
+scp fpoitevi@psexport.slac.stanford.edu:/cds/sw/ds/ana/conda2/manage/env_create.yaml .
