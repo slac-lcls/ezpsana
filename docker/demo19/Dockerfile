@@ -22,9 +22,10 @@ RUN yum clean all && \
                    devtoolset-7-make wget bzip2 strace && \
     yum clean all -y
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && \
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    chmod +x /root/Miniconda3-latest-Linux-x86_64.sh && \
+    /root/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda && \
+    rm /root/Miniconda3-latest-Linux-x86_64.sh &&
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc && \
@@ -32,7 +33,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-latest-Linux-x86
     source ~/.bashrc && \
     conda update -y conda && \
     conda update -y --all && \
-    conda install -y git "mpich>=7" mpi4py python=3.9 cmake numpy cython matplotlib pytest mongodb pymongo curl rapidjson ipython requests mypy h5py -c defaults -c anaconda -c conda-forge && \
+    conda install -y git "mpich>=7" mpi4py python=3.10 cmake numpy cython matplotlib pytest mongodb pymongo curl rapidjson ipython requests mypy h5py -c defaults -c anaconda -c conda-forge && \
     conda install -y amityping -c lcls-ii && \
     conda clean -y --all
 
@@ -42,11 +43,21 @@ ENV MATPLOTLIBRC=/tmp/matplotlibrc
 SHELL ["/bin/bash", "-c"]
 ENV BASH_ENV ~/.bashrc
 
-ADD lcls2 lcls2
-#RUN git clone https://github.com/slac-lcls/lcls2.git && \
-RUN pushd lcls2 && \
-    PYTHONPATH=/lcls2/install/lib/python3.6/site-packages ./build_all.sh -d && \
-    popd
+#ADD lcls2 lcls2
+
+WORKDIR /home/psana2-build
+RUN git clone https://github.com/apeck12/lcls2.git && \
+    cd lcls2 && \
+    . /opt/anaconda/etc/profile.d/conda.sh && \
+    source ~/.bashrc && \
+    export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
+    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
+    export TESTRELDIR=/home/psana2-build/lcls2/install && \
+    export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
+    ./build_all.sh
+#RUN pushd lcls2 && \
+#    PYTHONPATH=/lcls2/install/lib/python3.6/site-packages ./build_all.sh -d && \
+#    popd
 
 RUN conda uninstall --force mpich
 
