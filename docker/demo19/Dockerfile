@@ -15,6 +15,8 @@ FROM centos:centos7
 #ENV https_proxy https://psproxy:3128
 #ENV ftp_proxy $http_proxy
 
+WORKDIR /root
+
 RUN yum clean all && \
     yum -y update && \
     yum -y install centos-release-scl-rh && \
