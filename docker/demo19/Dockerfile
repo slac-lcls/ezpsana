@@ -38,7 +38,7 @@ RUN echo ". /opt/anaconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     source ~/.bashrc && \
     conda update -y conda && \
     conda update -y --all && \
-    conda install -y git "mpich>=7" mpi4py python=3.10 cmake numpy cython matplotlib pytest mongodb pymongo curl rapidjson ipython requests mypy h5py -c defaults -c anaconda -c conda-forge && \
+    conda install -y git "mpich>=3" mpi4py python=3.10 cmake numpy cython matplotlib pytest mongodb pymongo curl rapidjson ipython requests mypy h5py -c defaults -c anaconda -c conda-forge && \
     conda install -y amityping -c lcls-ii && \
     conda clean -y --all
 
