@@ -26,7 +26,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     chmod +x /root/Miniconda3-latest-Linux-x86_64.sh && \
     /root/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda && \
     rm /root/Miniconda3-latest-Linux-x86_64.sh &&
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc && \
     echo "source /opt/rh/devtoolset-7/enable" >> ~/.bashrc && \
