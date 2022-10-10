@@ -48,16 +48,17 @@ ENV MATPLOTLIBRC=/tmp/matplotlibrc
 SHELL ["/bin/bash", "-c"]
 ENV BASH_ENV ~/.bashrc
 
-#WORKDIR /home/psana2-build
-#RUN git clone https://github.com/apeck12/lcls2.git && \
-#    cd lcls2 && \
-#    . /opt/anaconda/etc/profile.d/conda.sh && \
-#    source ~/.bashrc && \
-#    export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
-#    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
-#    export TESTRELDIR=/home/psana2-build/lcls2/install && \
-#    export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
-#    ./build_all.sh
+WORKDIR /home/psana2-build
+RUN git clone https://github.com/apeck12/lcls2.git && \
+    cd lcls2 && \
+    unset LD_LIBRARY_PATH && unset PYTHONPATH && \
+    . /opt/anaconda/etc/profile.d/conda.sh && \
+    source ~/.bashrc && \
+    export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
+    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.9/site-packages && \
+    export TESTRELDIR=/home/psana2-build/lcls2/install && \
+    export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
+    ./build_all.sh -d -m -p install
 
 RUN conda uninstall --force mpich
 
