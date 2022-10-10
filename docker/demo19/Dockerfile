@@ -27,8 +27,12 @@ RUN yum clean all && \
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     chmod +x /root/Miniconda3-latest-Linux-x86_64.sh && \
     /root/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda && \
-    rm /root/Miniconda3-latest-Linux-x86_64.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    rm /root/Miniconda3-latest-Linux-x86_64.sh \
+
+RUN . /opt/anaconda/etc/profile.d/conda.sh && \
+    conda update -c conda-forge conda \
+
+RUN echo ". /opt/anaconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc && \
     echo "source /opt/rh/devtoolset-7/enable" >> ~/.bashrc && \
     source ~/.bashrc && \
