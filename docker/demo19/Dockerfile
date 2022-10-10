@@ -48,21 +48,16 @@ ENV MATPLOTLIBRC=/tmp/matplotlibrc
 SHELL ["/bin/bash", "-c"]
 ENV BASH_ENV ~/.bashrc
 
-#ADD lcls2 lcls2
-
-WORKDIR /home/psana2-build
-RUN git clone https://github.com/apeck12/lcls2.git && \
-    cd lcls2 && \
-    . /opt/anaconda/etc/profile.d/conda.sh && \
-    source ~/.bashrc && \
-    export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
-    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
-    export TESTRELDIR=/home/psana2-build/lcls2/install && \
-    export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
-    ./build_all.sh
-#RUN pushd lcls2 && \
-#    PYTHONPATH=/lcls2/install/lib/python3.6/site-packages ./build_all.sh -d && \
-#    popd
+#WORKDIR /home/psana2-build
+#RUN git clone https://github.com/apeck12/lcls2.git && \
+#    cd lcls2 && \
+#    . /opt/anaconda/etc/profile.d/conda.sh && \
+#    source ~/.bashrc && \
+#    export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
+#    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
+#    export TESTRELDIR=/home/psana2-build/lcls2/install && \
+#    export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
+#    ./build_all.sh
 
 RUN conda uninstall --force mpich
 
@@ -74,10 +69,10 @@ RUN conda uninstall --force mpich
 #
 #
 ## setup environments for psana2 and cctbx
-ENV CONDA_EXE=/opt/conda/bin/conda
-ENV CONDA_PREFIX=/opt/conda
+ENV CONDA_EXE=/opt/anaconda/bin/conda
+ENV CONDA_PREFIX=/opt/anaconda
 ENV CONDA_PROMPT_MODIFIER=(base)
-ENV CONDA_PYTHON_EXE=/opt/conda/bin/python
+ENV CONDA_PYTHON_EXE=/opt/anaconda/bin/python
 ENV CONDA_SHLVL=1
 ENV INFOPATH=/opt/rh/devtoolset-7/root/usr/share/info
 
@@ -88,7 +83,7 @@ ENV PCP_DIR=/opt/rh/devtoolset-7/root
 ENV PERL5LIB=/opt/rh/devtoolset-7/root//usr/lib64/perl5/vendor_perl:/opt/rh/devtoolset-7/root/usr/lib/perl5:/opt/rh/devtoolset-7/root//usr/share/perl5/vendor_perl
 ENV PMI_MMAP_SYNC_WAIT_TIME=600
 ENV HOME=/tmp
-ENV PYTHONPATH=/lcls2/install/lib/python3.6/site-packages
+ENV PYTHONPATH=/lcls2/install/lib/python3.9/site-packages
 #
 ##ENV http_proxy ""
 ##ENV https_proxy ""
