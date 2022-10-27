@@ -20,6 +20,8 @@ WORKDIR /home/psana2-build
 
 RUN git clone https://github.com/apeck12/lcls2.git
 RUN cd lcls2 && \
+    unset LD_LIBRARY_PATH && \
+    unset PYTHONPATH && \
     . /opt/anaconda3/etc/profile.d/conda.sh && \
     conda activate ana && \
     export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
