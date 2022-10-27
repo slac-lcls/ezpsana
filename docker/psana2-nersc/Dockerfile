@@ -26,11 +26,11 @@ RUN cd lcls2 && \
     export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
     export TESTRELDIR=/home/psana2-build/lcls2/install && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
-    ./build_all.sh \
+    ./build_all.sh
 
 RUN git clone https://github.com/lcls-users/btx.git
 RUN cd btx && \
-    git checkout psana2_demo \
+    git checkout psana2_demo
 
 RUN /sbin/ldconfig
 
