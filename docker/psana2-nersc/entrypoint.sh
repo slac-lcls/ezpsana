@@ -3,7 +3,7 @@
 unset LD_LIBRARY_PATH
 unset PYTHONPATH
 
-source /opt/anaconda/etc/profile.d/conda.sh
+source /opt/anaconda3/etc/profile.d/conda.sh
 conda activate ana
 export PATH=/home/psana2-build/lcls2/install/bin:$PATH
 export PATH=/home/psana-build/btx/scripts:$PATH

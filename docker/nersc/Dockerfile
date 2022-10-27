@@ -1,4 +1,5 @@
 # https://gitlab.com/NERSC/nersc-official-images/-/blob/main/nersc/python/3.9-anaconda-2021.11/Dockerfile
+# https://docs.nersc.gov/development/shifter/how-to-use/#using-mpi-in-shifter
 FROM docker.io/library/ubuntu:latest
 WORKDIR /opt
 

@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-c"]
 COPY $inputyaml /opt/$inputyaml
 RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
     conda env create -n ana -f ${inputyaml} && \
-    conda clean -afy \
+    conda clean -afy
 
 RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
     conda activate ana && \
