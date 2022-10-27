@@ -16,11 +16,6 @@ RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
     conda env create -n ana -f ${inputyaml} && \
     conda clean -afy
 
-RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
-    conda activate ana && \
-    conda uninstall -y --force mpich && \
-    conda clean -afy
-
 WORKDIR /home/psana2-build
 
 RUN git clone https://github.com/apeck12/lcls2.git
