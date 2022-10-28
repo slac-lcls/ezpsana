@@ -34,7 +34,7 @@ RUN unset LD_LIBRARY_PATH && \
     unset PYTHONPATH && \
     . /opt/anaconda3/etc/profile.d/conda.sh && \
     conda activate ana && \
-    conda uninstall --force mpich
+    conda uninstall --force mpich mpi
 
 RUN git clone https://github.com/lcls-users/btx.git
 RUN cd btx && \
