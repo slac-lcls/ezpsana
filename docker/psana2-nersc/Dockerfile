@@ -39,4 +39,4 @@ RUN /sbin/ldconfig
 ADD entrypoint.sh /opt/entrypoint.sh
 WORKDIR /opt
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
