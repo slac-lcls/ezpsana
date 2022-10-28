@@ -30,6 +30,12 @@ RUN cd lcls2 && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
     ./build_all.sh -d
 
+RUN unset LD_LIBRARY_PATH && \
+    unset PYTHONPATH && \
+    . /opt/anaconda3/etc/profile.d/conda.sh && \
+    conda activate ana && \
+    conda uninstall --force mpich
+
 RUN git clone https://github.com/lcls-users/btx.git
 RUN cd btx && \
     git checkout psana2_demo
