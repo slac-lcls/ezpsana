@@ -25,7 +25,7 @@ RUN cd lcls2 && \
     . /opt/anaconda3/etc/profile.d/conda.sh && \
     conda activate ana && \
     export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
-    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.10/site-packages && \
+    export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.9/site-packages && \
     export TESTRELDIR=/home/psana2-build/lcls2/install && \
     export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}} && \
     ./build_all.sh -d
