@@ -12,8 +12,11 @@ RUN apt-get -y update && \
 SHELL ["/bin/bash", "-c"]
 
 COPY $inputyaml /opt/$inputyaml
+#RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
+#    conda env create -n ana -f ${inputyaml} && \
+#    conda clean -afy
 RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
-    conda env create -n ana -f ${inputyaml} && \
+    conda env update --file ${inputyaml} && \
     conda clean -afy
 
 WORKDIR /home/psana2-build
@@ -23,7 +26,6 @@ RUN cd lcls2 && \
     unset LD_LIBRARY_PATH && \
     unset PYTHONPATH && \
     . /opt/anaconda3/etc/profile.d/conda.sh && \
-    conda activate ana && \
     export PATH=/home/psana2-build/lcls2/install/bin:$PATH && \
     export PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.9/site-packages && \
     export TESTRELDIR=/home/psana2-build/lcls2/install && \
@@ -33,7 +35,6 @@ RUN cd lcls2 && \
 RUN unset LD_LIBRARY_PATH && \
     unset PYTHONPATH && \
     . /opt/anaconda3/etc/profile.d/conda.sh && \
-    conda activate ana && \
     conda uninstall --force mpich mpi
 
 RUN git clone https://github.com/lcls-users/btx.git
