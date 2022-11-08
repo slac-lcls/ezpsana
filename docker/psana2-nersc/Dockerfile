@@ -13,7 +13,7 @@ RUN apt-get -y update && \
 SHELL ["/bin/bash", "-c"]
 
 #COPY $inputyaml /opt/$inputyaml
-COPY inputtxt /opt/$inputtxt
+COPY $inputtxt /opt/$inputtxt
 #RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
 #    conda env create -n ana -f ${inputyaml} && \
 #    conda clean -afy
