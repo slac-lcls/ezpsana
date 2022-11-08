@@ -18,7 +18,7 @@ jobs:
       - name: install dependencies
         run: pip install pyyaml docker jinja2
       - name: build container
-        run: docker build --build-arg inputyaml=env.yaml --tag fpoitevi/psana2nersc:latest docker/psana2-nersc
+        run: docker build --build-arg inputtxt=env.txt --tag fpoitevi/psana2nersc:latest docker/psana2-nersc
       - name: login to DockerHub
         uses: docker/login-action@v1
         with:

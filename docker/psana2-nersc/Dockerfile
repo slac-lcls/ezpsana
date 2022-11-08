@@ -1,6 +1,7 @@
 FROM fpoitevi/nersc:latest
 
-ARG inputyaml
+#ARG inputyaml
+ARG inputtxt
 
 WORKDIR /opt
 
@@ -11,10 +12,13 @@ RUN apt-get -y update && \
 
 SHELL ["/bin/bash", "-c"]
 
-COPY $inputyaml /opt/$inputyaml
-RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
-    conda env create -n ana -f ${inputyaml} && \
-    conda clean -afy
+#COPY $inputyaml /opt/$inputyaml
+COPY inputtxt /opt/$inputtxt
+#RUN . /opt/anaconda3/etc/profile.d/conda.sh && \
+#    conda env create -n ana -f ${inputyaml} && \
+#    conda clean -afy
+RUN conda install -c lcls-ii -c conda-forge -c defaults -c tidair-packages -c cogsci --file $inputtxt
+
 
 #WORKDIR /home/psana2-build
 #
