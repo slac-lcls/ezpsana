@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-unset LD_LIBRARY_PATH
+#unset LD_LIBRARY_PATH
 unset PYTHONPATH
 
 source /opt/anaconda3/etc/profile.d/conda.sh
