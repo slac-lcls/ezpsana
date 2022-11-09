@@ -41,8 +41,5 @@ RUN conda update --yes conda && \
     conda uninstall mpich mpi --yes && \
     conda install --yes -c conda-forge mamba
 
-#uninstalling mpi removes essential packages, so re-add
-#RUN mamba install --yes astropy cartopy cython cfitsio dask scipy scikit-learn scikit-image numba h5py matplotlib joblib pandas seaborn statsmodels
-
 #build mpi4py on top of our mpich
 RUN python -m pip install mpi4py
