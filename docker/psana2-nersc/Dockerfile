@@ -48,7 +48,7 @@ ENV HDF5_USE_FILE_LOCKING=FALSE
 
 RUN /sbin/ldconfig
 
-#ADD entrypoint.sh /opt/entrypoint.sh
-#WORKDIR /opt
-#RUN chmod +x entrypoint.sh
-#ENTRYPOINT ["/opt/entrypoint.sh"]
+ADD entrypoint.sh /opt/entrypoint.sh
+WORKDIR /opt
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/opt/entrypoint.sh"]
