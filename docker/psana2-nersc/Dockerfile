@@ -26,17 +26,33 @@ ENV PYTHONPATH=/home/psana2-build/lcls2/install/lib/python3.9/site-packages
 RUN git clone https://github.com/apeck12/lcls2.git
 RUN cd lcls2 && ./build_all.sh -d
 
-
 RUN wget -nv https://www.mrc-lmb.cam.ac.uk/mosflm/mosflm/ver740/pre-built/mosflm-linux-64-noX11.zip
 RUN unzip mosflm-linux-64-noX11.zip
 RUN mv mosflm-linux-64-noX11 /usr/local/bin/mosflm
 
+ENV PATH=/home/psana2-build/XDS-INTEL64_Linux_x86_64:$PATH
+ENV KMP_STACKSIZE=8m
+RUN wget -nv https://xds.mr.mpg.de/XDS-INTEL64_Linux_x86_64.tar.gz
+RUN tar -xzf XDS-INTEL64_Linux_x86_64.tar.gz && \
+    rm -f XDS-INTEL64_Linux_x86_64.tar.gz
+
 # see https://stash.desy.de/projects/CRYS/repos/crystfel/browse/INSTALL.md
+ENV SYMINFO=/usr/share/ccp4/syminfo.lib
 RUN git clone https://stash.desy.de/scm/crys/crystfel.git
 RUN cd crystfel && meson build -Dprefix=/usr/local
 RUN cd crystfel && ninja -C build
 RUN cd crystfel && ninja -C build test
 RUN cd crystfel && ninja -C build install
+
+RUN wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1XvZ1FJFFaunq151e4WrjFkpc-My3m8XQ' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1XvZ1FJFFaunq151e4WrjFkpc-My3m8XQ" -O ccp4-7.1.002-shelx-linux64.tar.gz &&                         \
+    rm -rf /tmp/cookies.txt
+RUN tar -xzvf ccp4-7.1.002-shelx-linux64.tar.gz &&\
+    cd ccp4-7.1 &&\
+    ./BINARY.setup --run-from-script &&\
+    sed -i 's|export CCP4_SCR|#export CCP4_SCR=|g' /home/psana2-build/ccp4-7.1/bin/ccp4.setup-sh &&\
+    cd /home/psana2-build &&\
+    rm -f ccp4-7.1.002-shelx-linux64.tar.gz
+ENV CCP4_SCR=/tmp/ccp4scr
 
 ENV PATH=/home/psana2-build/btx/scripts:$PATH
 ENV PYTHONPATH=/home/psana2-build/btx:$PYTHONPATH
