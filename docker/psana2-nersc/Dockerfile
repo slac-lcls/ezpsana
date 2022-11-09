@@ -12,6 +12,8 @@ RUN apt-get -y update && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install meson
+
 SHELL ["/bin/bash", "-c"]
 
 COPY $inputtxt /opt/$inputtxt
