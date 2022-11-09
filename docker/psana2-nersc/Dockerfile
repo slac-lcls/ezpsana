@@ -5,7 +5,7 @@ ARG inputtxt
 WORKDIR /opt
 
 RUN apt-get -y update && \
-    apt-get -y install git wget vim emacs tmux screen openssh-client \
+    apt-get -y install git wget unzip vim emacs tmux screen openssh-client \
         libgsl-dev libgtk-3-dev libcairo2-dev libpango1.0-dev \
         libgdk-pixbuf2.0-dev libfftw3-dev flex bison libzmq3-dev \
         libmsgpack-dev libeigen3-dev libccp4-dev ninja-build && \
